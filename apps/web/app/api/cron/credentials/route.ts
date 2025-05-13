@@ -3,7 +3,6 @@
  *
  * It also deletes Credential records for all members of an organization that has delegation credentials disabled.
  */
-import { defaultResponderForAppDir } from "app/api/defaultResponderForAppDir";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -12,6 +11,8 @@ import logger from "@calcom/lib/logger";
 import { safeStringify } from "@calcom/lib/safeStringify";
 import { CredentialRepository } from "@calcom/lib/server/repository/credential";
 import { DelegationCredentialRepository } from "@calcom/lib/server/repository/delegationCredential";
+
+import { defaultResponderForAppDir } from "../../defaultResponderForAppDir";
 
 const log = logger.getSubLogger({ prefix: ["CreateCredentials"] });
 const batchSizeToCreateCredentials = 100;
