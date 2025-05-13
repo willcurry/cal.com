@@ -36,7 +36,7 @@ import type { EventTypeMetadata } from "@calcom/prisma/zod-utils";
 import { getAllWorkflowsFromEventType } from "@calcom/trpc/server/routers/viewer/workflows/util";
 import type { CalendarEvent } from "@calcom/types/Calendar";
 
-import { getAllCredentials } from "./getAllCredentialsForUsersOnEvent/getAllCredentials";
+import { getAllCredentialsIncludeServiceAccountKey } from "./getAllCredentialsForUsersOnEvent/getAllCredentials";
 import { getBookingToDelete } from "./getBookingToDelete";
 import { handleInternalNote } from "./handleInternalNote";
 import cancelAttendeeSeat from "./handleSeats/cancel/cancelAttendeeSeat";
@@ -466,7 +466,7 @@ async function handler(input: CancelBookingInput) {
 
     const bookingToDeleteEventTypeMetadata = bookingToDeleteEventTypeMetadataParsed.data;
 
-    const credentials = await getAllCredentials(bookingToDelete.user, {
+    const credentials = await getAllCredentialsIncludeServiceAccountKey(bookingToDelete.user, {
       ...bookingToDelete.eventType,
       metadata: bookingToDeleteEventTypeMetadata,
     });
